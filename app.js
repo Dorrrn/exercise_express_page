@@ -1,13 +1,30 @@
 const express = require("express");
+const hbs = require("hbs");
 const app = express();
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
 
+hbs.registerPartials(__dirname + "/views/partials");
+
 app.use(express.static("public")); // important: after const app = express() and before app.get()
 
 app.get("/", (request, response, next) => {
-  response.render("home");
+  const products = [
+    {
+      title: "Sewing machine 1",
+      price: 100,
+    },
+    {
+      title: "Sewing machine 2",
+      price: 180,
+    },
+    {
+      title: "Sewing machine 3",
+      price: 440,
+    },
+  ];
+  response.render("home", {products: products});
 });
 
 app.get("/contact", (request, response, next) => {

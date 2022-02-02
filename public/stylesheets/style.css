@@ -11,6 +11,13 @@ ul {
 
 .product img {
   max-width: 300px;
+  border-radius: 2rem;
+}
+
+.product-summary {
+  border: 1px solid gray;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 img {
