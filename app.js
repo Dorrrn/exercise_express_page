@@ -7,11 +7,11 @@ app.set("view engine", "hbs");
 app.use(express.static("public")); // important: after const app = express() and before app.get()
 
 app.get("/", (request, response, next) => {
-  response.sendFile(__dirname + "/views/home.html");
+  response.render("home");
 });
 
 app.get("/contact", (request, response, next) => {
-  response.sendFile(__dirname + "/views/contact.html");
+  response.render("contact");
 });
 
 // using HBS
@@ -35,8 +35,8 @@ app.get("/product-w6", (request, response, next) => {
     seller: {
       name: "Bob",
       location: "Berlin",
-      rating: "4.5"
-    }
+      rating: "4.5",
+    },
   };
   response.render("product", productDetails);
 });
@@ -45,7 +45,7 @@ app.get("/product-brother", (request, response, next) => {
   const productDetails = {
     title: "Brother 2000",
     price: 550,
-    categories: ["advanced", "high price"]
+    categories: ["advanced", "high price"],
   };
   response.render("product", productDetails);
 });
