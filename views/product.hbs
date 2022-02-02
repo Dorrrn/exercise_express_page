@@ -12,10 +12,36 @@
       <h1>{{title}}</h1>
       <h3>Price: {{price}} Euro</h3>
 
+      {{! Display image }}
       {{#if imgSrc}}
         <img src="{{imgSrc}}" alt="{{title}}" />
       {{else}}
         <img src="https://via.placeholder.com/700x350" alt="generic image" />
+      {{/if}}
+
+      {{! Display categories }}
+      {{#if categories}}
+        <ul>
+          {{#each categories}}
+            <li>
+              <a href="/{{this}}">
+                {{this}}
+              </a>
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+
+      {{! Display seller }}
+      {{#if seller}}
+        <div>
+          <h3>Seller details</h3>
+          <p>{{seller.name}}
+            from
+            {{seller.location}}
+            <br />
+            {{seller.rating}}</p>
+        </div>
       {{/if}}
 
     </article>
