@@ -1,0 +1,56 @@
+// 1:1 relationships --> use Embedded Documents
+
+const addressSchema = new Schema({
+    city: String,
+    postCode: String
+});
+
+const companySchema = new Schema({
+    name: String,
+    numberOfEmployees: Number,
+    address: addressSchema
+});
+        
+// 1:many relationships 
+//--> A: use Embedded Documents if possible (eg. as long as you're not duplicating data)
+
+const addressSchema = new Schema({
+    city: String,
+    postCode: String
+});
+
+const companySchema = new Schema({
+    name: String,
+    numberOfEmployees: Number,
+    address: [addressSchema]
+});
+
+
+// 1:many relationships --> B: reference
+
+const companySchema = new Schema({
+    name: String,
+    numberOfEmployees: Number,
+    address: {type: mongoose.Schema.Types.ObjectId, ref: 'Address'}
+});
+
+
+// many:many relationships --> Reference
+
+const companySchema = new Schema({
+    name: String,
+    numberOfEmployees: Number,
+    address: [{type: mongoose.Schema.Types.ObjectId, ref: 'Address'}]
+});
+
+/////////// ---- Example for ecommerceApp ---- //////////////
+
+  - Product + specs(size, weight,...) (1:1)
+  - Product + comments (1:many with embedded documents)
+  - Product + Seller (1:many with references)
+    - opt1: store ref. in the seller (need to keep an array)
+    - opt2: store ref. in the product (easier)
+    - opt3: store ref. in both models (problem: single source of truth, easier to corrupt DB)
+  - (bonus) Each product can have multiple sellers (many:many with references)
+    - store [ref.] in the seller (easier to get list of products from seller)
+    - store [ref.] in the product (easier to get list of sellers of a product)

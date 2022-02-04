@@ -28,7 +28,7 @@ const boatDetails2 = {
 };
 
 const boatDetails3 = {
-  title: "yacht",
+  title: "yatch",
   price: 102000,
   color: "pink",
 };
