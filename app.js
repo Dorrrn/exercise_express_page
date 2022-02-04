@@ -46,6 +46,16 @@ app.get("/products/:productTitle/:productId", function (req, res, next) {
     .catch((error) => console.log("this is an error", error));
 });
 
+// ===== create search page
+app.get("/search", (req, res, next) => {
+  Product.find({ price: { $lt: req.query.maxPrice } })
+    .then((productsArr) => {
+      //console.log(productsArr);
+      res.render("search", { products: productsArr });
+    })
+    .catch((error) => console.log("this is an error", error));
+});
+
 // ==== localhost server
 app.listen(3000, () => {
   console.log("server listening....");
