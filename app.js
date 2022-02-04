@@ -34,17 +34,17 @@ app.get("/contact", function (request, response, next) {
 });
 
 // create routes for all products with req.params
-app.get("/products/:productId", function (request, response, next) {
-  Product.findById({ _id: request.params.productId })
-    .then((productFromDb) => {
-      response.render("product", productFromDb); //"product" = view
-      console.log(productFromDb);
-    })
-    .catch((error) => console.log("this is an error", error));
-});
-
-
-
+app.get(
+  "/products/:productTitle/:productId",
+  function (request, response, next) {
+    Product.findById({ _id: request.params.productId })
+      .then((productFromDb) => {
+        response.render("product", productFromDb); //"product" = view
+        console.log(productFromDb);
+      })
+      .catch((error) => console.log("this is an error", error));
+  }
+);
 
 app.listen(3000, () => {
   console.log("server listening....");

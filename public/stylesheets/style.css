@@ -20,6 +20,11 @@ ul {
   padding: 1rem;
 }
 
+.product-nav {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
 img {
   max-width: 700px;
 }
