@@ -1,5 +1,22 @@
+{{! Homepage}}
+
 <h1>This is the homepage</h1>
 <img src="/images/iron_maiden.jpg" />
+<br />
+<br />
+
+
+
+<section id="product-search">
+  <form action="/search" method="GET">  
+  {{!/search: where we are sending info to, method on default: get}}
+  <label>Max price:
+<input type="number" name="maxPrice" />
+</label>
+<button type="submit">search</button>
+  </form>
+</section>
+
 
 <section id="product-list">
 

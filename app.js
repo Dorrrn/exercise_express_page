@@ -1,3 +1,4 @@
+// ====== Setup for using express.js, mongoose
 const express = require("express");
 const hbs = require("hbs");
 const app = express();
@@ -13,7 +14,7 @@ hbs.registerPartials(__dirname + "/views/partials");
 
 app.use(express.static("public"));
 
-// connect to DB
+// ===== connect to DB
 mongoose
   .connect("mongodb://0.0.0.0:27017/ecommerceApp")
   .then((x) =>
@@ -21,31 +22,31 @@ mongoose
   )
   .catch((err) => console.error("Error connecting to mongo", err));
 
-app.get("/", function (request, response, next) {
+// ====== create route to homepage
+app.get("/", function (req, res, next) {
   Product.find()
     .then((products) => {
-      response.render("home", { products: products });
+      res.render("home", { products: products });
     })
     .catch((error) => console.log("this is an error", error));
 });
 
-app.get("/contact", function (request, response, next) {
-  response.render("contact");
+//====== create route to contact page
+app.get("/contact", function (req, res, next) {
+  res.render("contact");
 });
 
-// create routes for all products with req.params
-app.get(
-  "/products/:productTitle/:productId",
-  function (request, response, next) {
-    Product.findById({ _id: request.params.productId })
-      .then((productFromDb) => {
-        response.render("product", productFromDb); //"product" = view
-        console.log(productFromDb);
-      })
-      .catch((error) => console.log("this is an error", error));
-  }
-);
+// ===== create routes for all product pages with req.params
+app.get("/products/:productTitle/:productId", function (req, res, next) {
+  Product.findById({ _id: req.params.productId })
+    .then((productFromDb) => {
+      res.render("product", productFromDb); //"product" = view
+      console.log(productFromDb);
+    })
+    .catch((error) => console.log("this is an error", error));
+});
 
+// ==== localhost server
 app.listen(3000, () => {
   console.log("server listening....");
 });
